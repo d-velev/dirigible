@@ -19,7 +19,6 @@ import java.util.UUID;
 
 import org.eclipse.dirigible.commons.config.DirigibleConfig;
 import org.eclipse.dirigible.components.api.messaging.MessagingFacade;
-import org.eclipse.dirigible.components.api.security.UserFacade;
 import org.eclipse.dirigible.components.base.context.OriginatingUser;
 import org.eclipse.dirigible.components.data.store.java.repository.DomainEvent;
 import org.hibernate.Session;
@@ -216,8 +215,8 @@ public class EventOutbox implements org.eclipse.dirigible.components.api.messagi
      * @return the user, or {@code null}
      */
     private static String originatingUser() {
-        return UserFacade.findName()
-                         .orElse(null);
+        return OriginatingUser.get()
+                              .orElse(null);
     }
 
     /**
